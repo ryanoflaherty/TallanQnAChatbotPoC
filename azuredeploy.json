@@ -95,7 +95,7 @@
                 "[parameters('siteName')]"
             ],
             "properties": {
-                "PROJECT": "src\\Tallan.FaqBot.csproj",
+                "PROJECT": "src/Tallan.FaqBot.csproj",
                 "clientUrl": "[concat('http://', parameters('siteName'), '.azurewebsites.net')]"
             }
         },
