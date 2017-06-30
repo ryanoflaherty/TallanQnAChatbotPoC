@@ -32,7 +32,9 @@
     },
     "clientCompany": {
       "type": "string",
-      "defaultValue": "Enter your company name"
+      "metadata": {
+          "description": "Enter your company name"
+      }
     },
     "repoUrl": {
       "type": "string"
