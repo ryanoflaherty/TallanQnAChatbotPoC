@@ -55,16 +55,20 @@
   },
   "resources": [
     {
-      "apiVersion": "2016-09-01",
-      "name": "[parameters('hostingPlanName')]",
-      "type": "Microsoft.Web/serverfarms",
-      "location": "[parameters('siteLocation')]",
-      "properties": {
+        "apiVersion": "2015-08-01",
         "name": "[parameters('hostingPlanName')]",
-        "sku": "[parameters('skuName')]",
-        "workerSize": "[parameters('skuCapacity')]",
-        "numberOfWorkers": 1
-      }
+        "type": "Microsoft.Web/serverfarms",
+        "location": "[resourceGroup().location]",
+        "tags": {
+            "displayName": "HostingPlan"
+        },
+        "sku": {
+            "name": "[parameters('skuName')]",
+            "capacity": "[parameters('skuCapacity')]"
+        },
+        "properties": {
+            "name": "[parameters('hostingPlanName')]"
+        }
     },
     {
       "apiVersion": "2015-08-01",
