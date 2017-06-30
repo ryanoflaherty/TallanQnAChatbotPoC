@@ -75,7 +75,8 @@
           "type": "config",
           "name": "web",
           "dependsOn": [
-            "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
+            "[resourceId('Microsoft.Web/sites', parameters('siteName'))]",
+            "[concat('Microsoft.Web/sites/', parameters('siteName'), '/config/web')]"
           ],
           "properties": {
             "appSettings": [
@@ -83,18 +84,7 @@
                 "name": "clientCompany",
                 "value": "[parameters('clientCompany')]"
               }
-            ]
-          }
-        },
-        {
-          "apiVersion": "2015-08-01",
-          "name": "web",
-          "type": "config",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', parameters('siteName'))]",
-            "[concat('Microsoft.Web/sites/', parameters('siteName'), '/config/web')]"
-          ],
-          "properties": {
+            ],
             "RepoUrl": "[parameters('repoUrl')]",
             "branch": "[parameters('branch')]",
             "IsManualIntegration": true
