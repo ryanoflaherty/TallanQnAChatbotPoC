@@ -1,0 +1,141 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Tallan FAQ Bot";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    @Styles.Render("~/bundles/css")
+</head>
+<body ng-app="faqBotApp" ng-controller="menuController" onresize="resizedWindow()">
+    <nav class="navbar navbar-inverse navbar-fixed-top no-sides-padding">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a href="#menu-toggle" id="menu-toggle" ng-click="toggleMenu($event)"><span class="fa fa-bars"></span><span class="sr-only">Toggle Menu</span></a></li>
+                <li><a href="#">@ViewData["Title"]<span ng-cloak> - {{source.Name}}</span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="manageSources()"><span class="fa fa-gears"></span><span class="sr-only">Manage FAQ Sources</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="wrapper" ng-class="{'toggled': open}">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="faqSource" ng-repeat="source in sources | orderBy: 'Name'">
+                    <a href="javascript:void(0)" ng-click="changeSource($event, source)">{{source.Name}}</a>
+                    <ul>
+                        <li>
+                            <a ng-href="{{source.FaqUrl}}" target="_blank">View Original FAQ<span class="fa fa-external-link"></span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+</div> 
+<div id="wrap" ng-controller="faqController" ng-cloak scroll-glue>
+    <div id="body-container" class="container-fluid">
+        <div id="messages-container">
+            <table id="messages-container-t">
+                <tbody>
+                <tr>
+                    <td id="messages-container-c">
+                        <div ng-repeat="message in messages">
+                            <div>
+                                <div ng-switch="message.isBot">
+                                    <div ng-switch-when="false">
+                                        <div class="col-xs-10 pull-right no-sides-padding msg-animate">
+                                            <div class="user-icon-div">
+                                                <div>
+                                                    <span class="fa fa-user fa-3x"></span>
+                                                </div>
+                                            </div>
+                                            <div class="panel message-panel user-msg">
+                                                <div class="panel-body userBackgroundColor user-msg-body">
+                                                    <div>
+                                                        <div class="message-text">
+                                                            <ng-bind-html ng-bind-html="message.message | markdown"></ng-bind-html>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                                <div>
+                                                    <div class="panel-footer message-panel-timestamp user-message-panel-timestamp">{{::message.user}} · <time am-time-ago="message.time"></time></div>
+                                                </div>
+                                            </div>
+                                            <div class="user-msg-bubble user-msg-bubble-color"></div>
+                                        </div>
+                                    </div>
+                                    <div ng-switch-when="true" ng-show="message.visible">
+                                        <div class="col-xs-11 no-sides-padding msg-animate">
+                                            <div class="bot-icon-div">
+                                                <div>
+                                                    <span class="fa-stack fa-lg">
+                                                        <span class="fa fa-circle-o fa-stack-2x"></span>
+                                                        <span class="fa fa-code fa-stack-1x"></span>
+
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="panel message-panel bot-msg">
+                                                <div class="panel-body botBackgroundColor bot-msg-body">
+                                                    <div>
+                                                        <div class="message-text">
+                                                            <ng-bind-html ng-bind-html="message.message | markdown"></ng-bind-html>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="panel-footer message-panel-timestamp">{{::message.user}} · <time am-time-ago="message.time"></time> · {{::message.score | number: 2}}% confidence<span ng-show="message.hasAlternatives && !message.isAlternative"> · <a ng-hide="alternativesVisible(message)" ng-click="toggleAltAnswers(message)">Show alternative answers</a><a ng-show="alternativesVisible(message)" ng-click="toggleAltAnswers(message)">Hide alternative answers</a></span></div>
+                                                </div>
+                                            </div>
+                                            <div class="bot-msg-bubble bot-msg-bubble-color"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div id="bottom-box" class="container-fluid botAccentColor">
+            <div id="send-btn" class="row">
+                <form>
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <input type="text" name="question" id="question" autocomplete="off" class="form-control" ng-required ng-model="question" placeholder="Type your question..."/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" ng-click="askQuestion()"><span class="fa fa-paper-plane"></span><span class="sr-only">Ask Question</span></button>
+                                <button class="btn btn-danger" ng-click="messages = []"><span class="fa fa-times-circle"></span>&nbsp;Clear</button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">&copy; @DateTime.Now.Year - Tallan, Inc.</p>
+    </div>
+</footer>
+@Html.Partial("_SourcesModal")
+@Scripts.Render("~/bundles/js")
+<script type="text/javascript">
+    function resizedWindow() {
+        $('#wrap').css('height', $('body').height() - 89 + 'px');
+    }
+    resizedWindow();
+</script>
+</body>
+</html>
