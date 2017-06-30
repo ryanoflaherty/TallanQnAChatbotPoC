@@ -112,11 +112,22 @@
                 "name": "clientCompany",
                 "value": "[parameters('clientCompany')]"
                 }
-            ],
-            "RepoUrl": "[parameters('repoUrl')]",
-            "branch": "[parameters('branch')]",
-            "IsManualIntegration": true
+            ]
           }
+        },
+        {
+            "apiVersion": "2015-08-01",
+            "name": "web",
+            "type": "sourcecontrols",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
+                "[resourceId('Microsoft.Web/Sites/config', parameters('siteName'), 'appsettings')]"
+            ],
+            "properties": {
+                "RepoUrl": "[parameters('repoUrl')]",
+                "branch": "[parameters('branch')]",
+                "IsManualIntegration": true
+            }
         }
       ]
     }
