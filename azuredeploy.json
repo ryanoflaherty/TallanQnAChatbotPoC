@@ -139,6 +139,18 @@
             "resources": [
                 {
                     "apiVersion": "2015-08-01",
+                    "name": "appsettings",
+                    "type": "config",
+                    "dependsOn": [
+                        "[variables('webSiteName')]"
+                    ],
+                    "properties": {
+                        "PROJECT": "src\\Tallan.FaqBot.csproj",
+                        "clientUrl": "[concat('http://', variables('webSiteName'), '.azurewebsites.net')]"
+                    }
+                },
+                {
+                    "apiVersion": "2015-08-01",
                     "type": "config",
                     "name": "connectionstrings",
                     "dependsOn": [
