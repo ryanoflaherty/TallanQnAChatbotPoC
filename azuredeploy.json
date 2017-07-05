@@ -76,7 +76,7 @@
     }
   },
   "variables": {
-    "sqlserverName": "[concat('sqlserver', parameters('siteName'))]",
+    "sqlserverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]",
     "databaseName": "tallanqnabot"
   },
   "resources": [
@@ -159,8 +159,7 @@
           "properties": {
             "appSettings": [
               {
-                "name": "clientCompany",
-                "value": "[parameters('clientCompany')]"
+                "name": "[parameters('clientCompany')]"
               }
             ]
           }
