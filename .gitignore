@@ -2,6 +2,8 @@
 
 ### Custom ###
 AzureDeployment/
+Tallan.FaqBot.Database/
+test.json
 
 ### Windows ###
 # Windows image file caches

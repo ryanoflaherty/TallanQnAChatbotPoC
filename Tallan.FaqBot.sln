@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tallan.FaqBot", "Tallan.FaqBot\Tallan.FaqBot.csproj", "{9F5F8AB4-9FDA-424A-9FD2-C2E5A3C7FF50}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Tallan.FaqBot.Database", "Tallan.FaqBot.Database\Tallan.FaqBot.Database.sqlproj", "{CE704244-ACC8-45E5-9435-02EF75CD814D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F5F8AB4-9FDA-424A-9FD2-C2E5A3C7FF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F5F8AB4-9FDA-424A-9FD2-C2E5A3C7FF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F5F8AB4-9FDA-424A-9FD2-C2E5A3C7FF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F5F8AB4-9FDA-424A-9FD2-C2E5A3C7FF50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE704244-ACC8-45E5-9435-02EF75CD814D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE704244-ACC8-45E5-9435-02EF75CD814D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE704244-ACC8-45E5-9435-02EF75CD814D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CE704244-ACC8-45E5-9435-02EF75CD814D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE704244-ACC8-45E5-9435-02EF75CD814D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE704244-ACC8-45E5-9435-02EF75CD814D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.tallan.com:8181/tfs/tallan
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Tallan.FaqBot\\Tallan.FaqBot.csproj
+		SccProjectName1 = Tallan.FaqBot
+		SccLocalPath1 = Tallan.FaqBot
+		SccProjectUniqueName2 = Tallan.FaqBot.Database\\Tallan.FaqBot.Database.sqlproj
+		SccProjectName2 = Tallan.FaqBot.Database
+		SccLocalPath2 = Tallan.FaqBot.Database
+	EndGlobalSection
+EndGlobal
