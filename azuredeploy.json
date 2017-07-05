@@ -150,7 +150,8 @@
       "type": "Microsoft.Web/sites",
       "location": "[parameters('siteLocation')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+        "[resourceId('Microsoft.Web/serverFarms', parameters('hostingPlanName'))]",
+        "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
       ],
       "properties": {
         "serverFarmId": "[parameters('hostingPlanName')]"
