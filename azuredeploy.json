@@ -96,7 +96,7 @@
           "location": "[parameters('siteLocation')]",
           "apiVersion": "2014-04-01",
           "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
+            "[variables('sqlServerName')]"
           ],
           "properties": {
             "edition": "Basic",
@@ -109,7 +109,7 @@
           "type": "firewallRules",
           "apiVersion": "2014-04-01",
           "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
+            "[variables('sqlServerName')]"
           ],
           "location": "[parameters('siteLocation')]",
           "name": "AllowAllWindowsAzureIps",
@@ -138,8 +138,7 @@
       "type": "Microsoft.Web/sites",
       "location": "[parameters('siteLocation')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]",
-        "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
+        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
       ],
       "properties": {
         "serverFarmId": "[parameters('hostingPlanName')]"
@@ -191,7 +190,7 @@
           "name": "connectionstrings",
           "dependsOn": [
             "[parameters('siteName')]",
-            "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
+            "[variables('sqlServerName')]"
           ],
           "properties": {
             "TallanFaqBotModel": {
