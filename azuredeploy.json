@@ -74,6 +74,12 @@
           "description": "Enter your company name"
       }
     },
+    "Ocp-Apim-Subscription-Key": {
+      "type": "securestring",
+      "metadata": {
+          "description": "Enter your QnA subscription code"
+      }
+    },
     "repoUrl": {
       "type": "string"
     },
@@ -169,7 +175,8 @@
           ],
           "properties": {
             "clientUrl": "[concat('http://', parameters('siteName'), '.azurewebsites.net')]",
-            "clientCompany": "[parameters('clientCompany')]"
+            "clientCompany": "[parameters('clientCompany')]",
+            "Ocp-Apim-Subscription-Key": "[parameters('Ocp-Apim-Subscription-Key')]"
           }
         },
         {
