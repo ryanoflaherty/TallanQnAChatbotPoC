@@ -3,14 +3,23 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "siteName": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "description": "The name of the web app that you wish to create."
+      }
     },
     "hostingPlanName": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "description": "The name of the App Service plan to use for hosting the web app."
+      }
     },
     "siteLocation": {
       "type": "string",
-      "defaultValue": "East US"
+      "defaultValue": "East US",
+      "metadata": {
+        "description": "The location to use for creating the web app and hosting plan. It must be one of the Azure locations that support web apps."
+      }
     },
     "skuName": {
         "type": "string",
@@ -59,16 +68,12 @@
         "apiVersion": "2015-08-01",
         "name": "[parameters('hostingPlanName')]",
         "type": "Microsoft.Web/serverfarms",
-        "location": "[resourceGroup().location]",
-        "tags": {
-            "displayName": "HostingPlan"
+        "location": "[parameters('siteLocation')]",
+        "properties": {
         },
         "sku": {
             "name": "[parameters('skuName')]",
             "capacity": "[parameters('skuCapacity')]"
-        },
-        "properties": {
-            "name": "[parameters('hostingPlanName')]"
         }
     },
     {
@@ -77,34 +82,18 @@
       "type": "Microsoft.Web/sites",
       "location": "[parameters('siteLocation')]",
       "dependsOn": [
-        "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
+        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
       ],
-      "tags": {
-        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "empty"
-      },
       "properties": {
-        "name": "[parameters('siteName')]",
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+        "serverFarmId": "[parameters('hostingPlanName')]"
       },
       "resources": [
         {
-            "apiVersion": "2015-08-01",
-            "name": "appsettings",
-            "type": "config",
-            "dependsOn": [
-                "[parameters('siteName')]"
-            ],
-            "properties": {
-                "PROJECT": "src/Tallan.FaqBot.csproj",
-                "clientUrl": "[concat('http://', parameters('siteName'), '.azurewebsites.net')]"
-            }
-        },
-        {
           "apiVersion": "2015-08-01",
-          "type": "config",
           "name": "web",
+          "type": "config",
           "dependsOn": [
-            "[concat('Microsoft.Web/sites/', parameters('siteName'))]"
+            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
           ],
           "properties": {
             "appSettings": [
@@ -117,11 +106,23 @@
         },
         {
             "apiVersion": "2015-08-01",
+            "name": "appsettings",
+            "type": "config",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
+            ],
+            "properties": {
+                "PROJECT": "src/Tallan.FaqBot.csproj",
+                "clientUrl": "[concat('http://', parameters('siteName'), '.azurewebsites.net')]"
+            }
+        },
+        {
+            "apiVersion": "2015-08-01",
             "name": "web",
             "type": "sourcecontrols",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
-                "[resourceId('Microsoft.Web/Sites/config', parameters('siteName'), 'appsettings')]"
+                "[concat('Microsoft.Web/Sites/', parameters('siteName'), '/config/web')]"
             ],
             "properties": {
                 "RepoUrl": "[parameters('repoUrl')]",
@@ -131,5 +132,11 @@
         }
       ]
     }
-  ]
+  ],
+  "outputs": {
+     "siteUri": {
+       "type": "string",
+       "value": "[concat('https://',reference(resourceId('Microsoft.Web/sites', parameters('siteName'))).hostNames[0])]"
+     }
+  }
 }
