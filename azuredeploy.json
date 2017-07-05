@@ -197,8 +197,7 @@
           "type": "config",
           "name": "connectionstrings",
           "dependsOn": [
-            "[parameters('siteName')]",
-            "[variables('sqlServerName')]"
+            "[parameters('siteName')]"
           ],
           "properties": {
             "TallanFaqBotModel": {
