@@ -181,20 +181,6 @@
         },
         {
           "apiVersion": "2015-08-01",
-          "name": "web",
-          "type": "sourcecontrols",
-          "dependsOn": [
-              "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
-              "[resourceId('Microsoft.Web/Sites/config', parameters('siteName'), 'appsettings')]"
-          ],
-          "properties": {
-              "RepoUrl": "[parameters('repoUrl')]",
-              "branch": "[parameters('branch')]",
-              "IsManualIntegration": true
-          }
-        },
-        {
-          "apiVersion": "2015-08-01",
           "type": "config",
           "name": "connectionstrings",
           "dependsOn": [
@@ -205,6 +191,19 @@
               "value": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', variables('sqlServerName'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', variables('databaseName'), ';User Id=', parameters('sqlAdministratorLogin'), '@', reference(concat('Microsoft.Sql/servers/', variables('sqlServerName'))).fullyQualifiedDomainName, ';Password=', parameters('sqlAdministratorLoginPassword'), ';')]",
               "type": "SQLAzure"
             }
+          }
+        },
+        {
+          "apiVersion": "2015-08-01",
+          "name": "web",
+          "type": "sourcecontrols",
+          "dependsOn": [
+              "[parameters('siteName')]"
+          ],
+          "properties": {
+              "RepoUrl": "[parameters('repoUrl')]",
+              "branch": "[parameters('branch')]",
+              "IsManualIntegration": true
           }
         }
       ]
