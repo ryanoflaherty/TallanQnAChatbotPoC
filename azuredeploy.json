@@ -184,8 +184,7 @@
           "type": "config",
           "name": "connectionstrings",
           "dependsOn": [
-            "[parameters('siteName')]",
-            "[variables('sqlServerName')]"
+            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
           ],
           "properties": {
             "TallanFaqBotModel": {
