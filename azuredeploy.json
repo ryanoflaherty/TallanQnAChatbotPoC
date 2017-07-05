@@ -184,7 +184,8 @@
           "type": "config",
           "name": "connectionstrings",
           "dependsOn": [
-            "[parameters('siteName')]"
+            "[parameters('siteName')]",
+            "[variables('sqlServerName')]"
           ],
           "properties": {
             "TallanFaqBotModel": {
@@ -198,7 +199,7 @@
           "name": "web",
           "type": "sourcecontrols",
           "dependsOn": [
-              "[parameters('siteName')]"
+              "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
           ],
           "properties": {
               "RepoUrl": "[parameters('repoUrl')]",
