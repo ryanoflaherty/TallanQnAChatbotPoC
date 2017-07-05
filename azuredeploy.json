@@ -127,16 +127,16 @@
       ]
     },
     {
-        "apiVersion": "2015-08-01",
-        "name": "[parameters('hostingPlanName')]",
-        "type": "Microsoft.Web/serverfarms",
-        "location": "[parameters('siteLocation')]",
-        "properties": {
-        },
-        "sku": {
-            "name": "[parameters('skuName')]",
-            "capacity": "[parameters('skuCapacity')]"
-        }
+      "apiVersion": "2015-08-01",
+      "name": "[parameters('hostingPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[parameters('siteLocation')]",
+      "properties": {
+      },
+      "sku": {
+          "name": "[parameters('skuName')]",
+          "capacity": "[parameters('skuCapacity')]"
+      }
     },
     {
       "apiVersion": "2015-08-01",
@@ -158,37 +158,33 @@
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
           ],
           "properties": {
-            "appSettings": [
-              {
-                "name": "[parameters('clientCompany')]"
-              }
-            ]
           }
         },
         {
-            "apiVersion": "2015-08-01",
-            "name": "appsettings",
-            "type": "config",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
-            ],
-            "properties": {
-                "clientUrl": "[concat('http://', parameters('siteName'), '.azurewebsites.net')]"
-            }
+          "apiVersion": "2015-08-01",
+          "name": "appsettings",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
+          ],
+          "properties": {
+            "clientUrl": "[concat('http://', parameters('siteName'), '.azurewebsites.net')]",
+            "clientCompany": "[parameters('clientCompany')]"
+          }
         },
         {
-            "apiVersion": "2015-08-01",
-            "name": "web",
-            "type": "sourcecontrols",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
-                "[concat('Microsoft.Web/Sites/', parameters('siteName'), '/config/web')]"
-            ],
-            "properties": {
-                "RepoUrl": "[parameters('repoUrl')]",
-                "branch": "[parameters('branch')]",
-                "IsManualIntegration": true
-            }
+          "apiVersion": "2015-08-01",
+          "name": "web",
+          "type": "sourcecontrols",
+          "dependsOn": [
+              "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]",
+              "[concat('Microsoft.Web/Sites/', parameters('siteName'), '/config/web')]"
+          ],
+          "properties": {
+              "RepoUrl": "[parameters('repoUrl')]",
+              "branch": "[parameters('branch')]",
+              "IsManualIntegration": true
+          }
         },
         {
           "apiVersion": "2015-08-01",
