@@ -1,8 +1,10 @@
 ﻿app.controller('menuController',
     [
-        '$scope', '$http', 'faqService', '$element', '$document', '$uibModal',
-        function($scope, $http, faqService, $element, $document, $uibModal) {
-            $http.get('/api/FaqSources').then(function successCallback(response) {
+        '$scope', '$http', 'faqService', '$element', '$document', '$uibModal', '$location',
+        function ($scope, $http, faqService, $element, $document, $uibModal, $location) {
+            var workspace = $location.path().split("/").filter(function (param) { return param.length > 0 })[0] || '';
+
+            $http.get('/api/FaqSources?workspace=' + workspace).then(function successCallback(response) {
                     $scope.sources = response.data;
                     faqService.setSource($scope.sources[0]);
                     $scope.source = $scope.sources[0];
@@ -49,7 +51,8 @@
 
                             vm.addSource = function() {
                                 vm.editSource = {
-                                    edit: true
+                                    edit: true,
+                                    Workspace: workspace
                                 };
                                 vm.sources.push(vm.editSource);
                             }

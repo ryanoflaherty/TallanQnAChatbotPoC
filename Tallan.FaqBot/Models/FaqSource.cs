@@ -21,7 +21,8 @@ namespace Tallan.FaqBot.Models
 
         public string SearchURL { get; set; }
 
-        public int? Workspace { get; set; }
+        [StringLength(25)]
+        public string Workspace { get; set; }
 
         public int? MinConfidence { get; set; }
     }

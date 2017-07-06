@@ -13,9 +13,9 @@ namespace Tallan.FaqBot.Controllers
         private readonly TallanFaqBotModel _db = new TallanFaqBotModel();
 
         // GET: api/FaqSources
-        public IQueryable<FaqSource> GetFaqSources()
+        public IQueryable<FaqSource> GetFaqSources(string workspace = null)
         {
-            return _db.FaqSources;
+            return _db.FaqSources.Where(faq => faq.Workspace == workspace);
         }
 
         // GET: api/FaqSources/5
