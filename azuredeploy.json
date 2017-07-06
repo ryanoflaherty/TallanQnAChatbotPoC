@@ -175,7 +175,6 @@
             "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
           ],
           "properties": {
-            "clientUrl": "[concat('http://', parameters('siteName'), '.azurewebsites.net')]",
             "clientCompany": "[parameters('clientCompany')]"
           }
         },
@@ -208,15 +207,5 @@
         }
       ]
     }
-  ],
-  "outputs": {
-     "siteUri": {
-       "type": "string",
-       "value": "[concat('https://',reference(resourceId('Microsoft.Web/sites', parameters('siteName'))).hostNames[0])]"
-     },
-     "sqlSvrFqdn": {
-      "type": "string",
-      "value": "[reference(concat('Microsoft.Sql/servers/', variables('sqlServerName'))).fullyQualifiedDomainName]"
-    }
-  }
+  ]
 }
