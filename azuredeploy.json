@@ -176,8 +176,7 @@
           ],
           "properties": {
             "clientUrl": "[concat('http://', parameters('siteName'), '.azurewebsites.net')]",
-            "clientCompany": "[parameters('clientCompany')]",
-            "Ocp-Apim-Subscription-Key": "[parameters('Ocp-Apim-Subscription-Key')]"
+            "clientCompany": "[parameters('clientCompany')]"
           }
         },
         {
