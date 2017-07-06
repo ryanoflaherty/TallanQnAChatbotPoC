@@ -74,12 +74,6 @@
           "description": "Enter your company name"
       }
     },
-    "Ocp-Apim-Subscription-Key": {
-      "type": "securestring",
-      "metadata": {
-          "description": "Enter your QnA subscription code"
-      }
-    },
     "repoUrl": {
       "type": "string"
     },
