@@ -59,8 +59,8 @@ namespace Tallan.FaqBot.Controllers
                 }
                 throw;
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            
+            return Ok(faqSource);
         }
 
         // POST: api/FaqSources

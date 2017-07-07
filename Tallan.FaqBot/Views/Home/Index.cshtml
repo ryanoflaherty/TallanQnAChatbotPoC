@@ -114,7 +114,7 @@
                         <div class="input-group">
                             <input type="text" name="question" id="question" autocomplete="off" class="form-control" ng-required ng-model="question" placeholder="Type your question..."/>
                             <span class="input-group-btn">
-                                <button class="btn btn-success" ng-click="askQuestion()"><span class="fa fa-paper-plane"></span><span class="sr-only">Ask Question</span></button>
+                                <button ng-disabled="question.length == 0" class="btn btn-success" ng-click="askQuestion()"><span class="fa fa-paper-plane"></span><span class="sr-only">Ask Question</span></button>
                                 <button class="btn btn-danger" ng-click="messages = []"><span class="fa fa-times-circle"></span>&nbsp;Clear</button>
                             </span>
                         </div>

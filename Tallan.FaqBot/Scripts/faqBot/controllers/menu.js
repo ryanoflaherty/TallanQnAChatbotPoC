@@ -101,12 +101,15 @@
 
                                 request.then(
                                     function successCallback(response) {
-                                        //console.debug(response);
                                         if (source.FaqSourceId) {
+                                            var currentSource = faqService.currentSource();
                                             // This is an existing source, find it and replace it with the updated one
                                             for (var i = 0; i < $scope.sources.length; i++) {
                                                 if ($scope.sources[i].FaqSourceId === response.data.FaqSourceId) {
                                                     $scope.sources[i] = response.data;
+                                                    if (currentSource.FaqSourceId == $scope.sources[i].FaqSourceId) {
+                                                        faqService.setSource($scope.sources[i], false);
+                                                    }
                                                     break;
                                                 }
                                             }

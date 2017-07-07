@@ -31,10 +31,10 @@
                 faqService.postQuestion(question)
                     .then(
                         function successCallback(response) {
-                            //console.debug(response);
+                            var currentSource = faqService.currentSource();
                             angular.forEach(response.data.answers,
                                 function (value, key) {
-                                    $scope.messages.push({
+                                    var msg = {
                                         isBot: true,
                                         showTimestamp: true,
                                         showIcon: true,
@@ -45,7 +45,17 @@
                                         isAlternative: key > 0,
                                         hasAlternatives: response.data.answers.length > 1,
                                         visible: key === 0
-                                    });
+                                    };
+
+                                    if (!msg.isAlternative && currentSource.SearchURL && msg.score < currentSource.MinConfidence) {
+                                        var validUrlPattern = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+                                        if (currentSource.SearchURL && currentSource.SearchURL.match(validUrlPattern)) {
+                                            var link = currentSource.SearchURL.replace("{0}", encodeURIComponent(question));
+                                            msg.message = "No good match found in the KB. [Click here](" + link + ") to see search results instead."
+                                        }
+                                    }
+
+                                    $scope.messages.push(msg);
                                 });
                         },
                         function errorCallback(response) {

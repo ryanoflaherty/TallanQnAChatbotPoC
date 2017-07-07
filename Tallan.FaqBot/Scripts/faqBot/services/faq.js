@@ -5,15 +5,21 @@
             var currentSource = null;
 
             return {
-                setSource: function(source) {
+                currentSource: function () {
+                    return currentSource;
+                },
+                setSource: function(source, broadcastUpdate) {
                     var originalSource = angular.copy(currentSource);
                     currentSource = source;
 
-                    $rootScope.$broadcast('sourceChanged',
+                    if (broadcastUpdate != false)
+                    {
+                        $rootScope.$broadcast('sourceChanged',
                         {
                             original: originalSource,
                             changed: currentSource
                         });
+                    }
                 },
                 postQuestion: function(question) {
                     return $http.post('https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/' +
