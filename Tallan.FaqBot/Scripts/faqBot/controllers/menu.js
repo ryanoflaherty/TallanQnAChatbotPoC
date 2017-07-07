@@ -52,7 +52,7 @@
                             vm.addSource = function() {
                                 vm.editSource = {
                                     edit: true,
-                                    Workspace: workspace
+                                    Workspace: workspace == '' ? null : workspace
                                 };
                                 vm.sources.push(vm.editSource);
                             }

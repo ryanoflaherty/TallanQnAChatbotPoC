@@ -12,7 +12,9 @@
                         $scope.question = '';
                         $scope.messages = [];
                     }
-                    $scope.botName = args.changed.Name;
+                    if (args.changed) {
+                        $scope.botName = args.changed.Name;
+                    }
                 });
 
             $scope.askQuestion = function () {
