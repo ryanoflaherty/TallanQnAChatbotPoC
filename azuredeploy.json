@@ -75,10 +75,12 @@
       }
     },
     "repoUrl": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "https://github.com/ryanoflaherty/TallanQnAChatbotPoC"
     },
     "branch": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "master"
     }
   },
   "variables": {
