@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div ng-switch-when="true" ng-show="message.visible">
-                                        <div class="col-xs-11 no-sides-padding msg-animate">
+                                        <div class="no-sides-padding msg-animate" ng-class="message.isAlternative ? 'bot-msg-alternative col-xs-offset-1 col-xs-10' : 'col-xs-11'">
                                             <div class="bot-icon-div">
                                                 <div>
                                                     <span class="fa-stack fa-lg">

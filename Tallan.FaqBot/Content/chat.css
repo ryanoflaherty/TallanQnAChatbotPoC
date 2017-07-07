@@ -326,6 +326,18 @@ a {
     padding-top: 0 !important;
 }
 
+.bot-msg-alternative > .bot-msg {
+    max-width: 78.333333% !important;
+}
+
+.bot-msg-alternative .botBackgroundColor {
+    background-color: #c7cfd4 !important;
+}
+
+.bot-msg-alternative .bot-msg-bubble-color {
+    border-color: transparent #c7cfd4 transparent transparent !important;
+}
+
 .user-message-panel-timestamp {
     clear: both;
     float: right !important;
