@@ -1,6 +1,5 @@
 ﻿@{
     Layout = null;
-    ViewData["Title"] = "Tallan FAQ Bot";
 }
 <!DOCTYPE html>
 <html>
@@ -15,7 +14,7 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li><a href="#menu-toggle" id="menu-toggle" ng-click="toggleMenu($event)"><span class="fa fa-bars"></span><span class="sr-only">Toggle Menu</span></a></li>
-                <li><a href="#"><span class="hidden-xs hidden-sm">@ViewData["ClientCompany"] - </span><span class="hidden-xs">@ViewData["Title"]</span><span class="hidden-xs" ng-if="source.Name.length > 0"> - </span><span ng-cloak>{{source.Name}}</span></a></li>
+                <li><a href="#"><span class="hidden-xs">@ViewData["Title"]</span><span class="hidden-xs" ng-if="source.Name.length > 0"> - </span><span ng-cloak>{{source.Name}}</span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-click="manageSources()"><span class="fa fa-gears"></span><span class="sr-only">Manage FAQ Sources</span></a></li>

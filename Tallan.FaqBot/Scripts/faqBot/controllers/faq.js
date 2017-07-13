@@ -51,7 +51,7 @@
                                         var validUrlPattern = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
                                         if (currentSource.SearchURL && currentSource.SearchURL.match(validUrlPattern)) {
                                             var link = currentSource.SearchURL.replace("{0}", encodeURIComponent(question));
-                                            msg.message = "No good match found in the KB. [Click here](" + link + ") to see search results instead."
+                                            msg.message = "No FAQ found that matches your question. Try [clicking here](" + link + ") to see search results instead."
                                         }
                                     }
 
@@ -86,5 +86,9 @@
                 }
                 return false;
             }
+
+            angular.element('#wrap').on('click', 'a', function () {
+                this.target = "_blank";
+            });
         }
     ]);

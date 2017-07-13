@@ -15,8 +15,8 @@ namespace Tallan.FaqBot.Controllers
         public ActionResult Index(string workspace = null)
         {
             var appSettings = ConfigurationManager.AppSettings;
-            string result = appSettings[clientCompanyKey] ?? "Company Not Found";
-            ViewData["ClientCompany"] = result;
+            string result = appSettings[clientCompanyKey] ?? "Your Company";
+            ViewData["Title"] = string.Format("{0} FAQ Bot", result);
             return View();
         }
     }
