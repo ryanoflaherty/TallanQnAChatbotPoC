@@ -90,7 +90,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <div class="panel-footer message-panel-timestamp">{{::message.user}} · <time am-time-ago="message.time"></time> · {{::message.score | number: 2}}% confidence<span ng-show="message.hasAlternatives && !message.isAlternative"> · <a ng-hide="alternativesVisible(message)" ng-click="toggleAltAnswers(message)">Show alternative answers</a><a ng-show="alternativesVisible(message)" ng-click="toggleAltAnswers(message)">Hide alternative answers</a></span></div>
+                                                    <div class="panel-footer message-panel-timestamp">{{::message.user}} · <time am-time-ago="message.time"></time> · {{::message.score | number: 2}}% confidence<span ng-show="message.hasAlternatives && !message.isAlternative"> · <a ng-hide="alternativesVisible(message)" ng-click="toggleAltAnswers(message)">{{message.alternateMessage}}</a><a ng-show="alternativesVisible(message)" ng-click="toggleAltAnswers(message)">Hide alternative answers</a></span></div>
                                                 </div>
                                             </div>
                                             <div class="bot-msg-bubble bot-msg-bubble-color"></div>

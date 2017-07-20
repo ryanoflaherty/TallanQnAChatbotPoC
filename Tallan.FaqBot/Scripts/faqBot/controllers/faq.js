@@ -39,6 +39,7 @@
                                         showTimestamp: true,
                                         showIcon: true,
                                         message: value.answer,
+                                        alternateMessage: "Show alternative answers",
                                         score: value.score,
                                         user: $scope.botName,
                                         time: new Date(),
@@ -46,12 +47,13 @@
                                         hasAlternatives: response.data.answers.length > 1,
                                         visible: key === 0
                                     };
-
+                                    
                                     if (!msg.isAlternative && currentSource.SearchURL && msg.score < currentSource.MinConfidence) {
                                         var validUrlPattern = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
                                         if (currentSource.SearchURL && currentSource.SearchURL.match(validUrlPattern)) {
                                             var link = currentSource.SearchURL.replace("{0}", encodeURIComponent(question));
-                                            msg.message = "No FAQ found that matches your question. Try [clicking here](" + link + ") to see search results instead."
+                                            msg.message = "No FAQ found that closely matches your question. Try [clicking here](" + link + ") to see search results instead."
+                                            msg.alternateMessage = "Show potential answers";
                                         }
                                     }
 
